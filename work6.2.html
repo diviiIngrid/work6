@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+            <title>Задача2</title>
+            <meta charset="UTF-8">
+        </head>
+            <body>
+            <script>
+              
+                function getPrototype(obj) {
+                  let ancestors = [];
+
+                   while (obj.__proto__) {
+                   ancestors.push(obj.constructor.name);
+                   obj = obj.__proto__;
+                   }
+
+                  return ancestors;
+                  }
+
+              class Animal {
+                constructor (name) {
+                    this.name = name;
+                }
+              }
+
+              class Cats extends Animal {
+                constructor (name, gender) {
+                    super(name);
+                    this.gender = gender;
+                }
+              }
+
+              class Breed extends Cats {
+                constructor (name, gender, breed) {
+                    super (name, gender);
+                    this.breed = breed;
+                }
+              }
+
+              class Dogs extends Animal {
+                constructor (name, age) {
+                    super (name);
+                    this.age = age;
+                }
+              }
+
+              let cat = new Cats ('Masha', 'girl');
+
+              let breeds = new Breed ('Masha', 'girl', 'briton');
+            //   console.log (breeds);
+              console.log (getPrototype(breeds));
+
+            //   let dog = new Dogs ('Rich', 3);
+            //   console.log (dog)
+
+            let prototype = {
+                eat: 'meat',
+            };
+            cat.__proto__ = prototype;
+            console.log(cat.name);
+            console.log (cat.gender);
+            console.log (cat.eat);
+
+            // class Sound {
+            //     constructor ( gender, age, sound) {
+            //         super (name);
+            //         Cats.call (this.gender);
+            //         Dogs.call (this.age);
+            //         this.sound = sound;
+            //     }
+            // }
+
+            // let sounds = new Sound ('Example');
+
+            breeds.__proto__ = null;
+            // console.log (Breed instanceof Cats);
+            console.log (getPrototype(breeds));
+
+            
+            
+            </script>
+            </body>
+</html>
